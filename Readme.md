@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Polina](https://up.htmlacademy.ru/javascript/26/user/1981647).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Лепёшкин](https://htmlacademy.ru/profile/id144641).
 
 ---
 
