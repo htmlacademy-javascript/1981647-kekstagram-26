@@ -29,8 +29,6 @@ const NAMES = [
   'Вашингтон',
 ];
 
-// Генерация данных
-
 let commentIdCounter = 1;
 
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
@@ -65,5 +63,5 @@ const generatePhotoList = () => {
   return result;
 };
 
-export { shuffleArray, generateComment, generatePhotoList };
+export { generatePhotoList };
 
