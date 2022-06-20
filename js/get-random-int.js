@@ -11,6 +11,4 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (range)) + min;
 };
 
-getRandomInt(10, 11);
-
-export {getRandomInt};
+export { getRandomInt };

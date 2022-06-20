@@ -1,4 +1,3 @@
-function maxAllowedStringLength (string, maxLength) {
-  return string.length <= maxLength;
-}
-export {maxAllowedStringLength};
+const maxAllowedStringLength = (string, maxLength) => string.length <= maxLength;
+
+export { maxAllowedStringLength };
