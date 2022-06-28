@@ -62,6 +62,7 @@ const generatePhotoList = () => {
 
   return result;
 };
+const generatedPhotoList = generatePhotoList();
 
-export { generatePhotoList };
+export { generatedPhotoList };
 
