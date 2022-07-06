@@ -31,12 +31,20 @@ const showBigPicture = (element) => {
   bigPictureNode.querySelector('.social__comment-count').classList.add('hidden');
   bigPictureNode.querySelector('.comments-loader').classList.add('hidden');
   document.body.classList.add('modal-open');
+
+  document.addEventListener('keydown', onEscapeClick);
 };
 
 const hideBigPicture = () => {
   document.querySelector('.big-picture').classList.add('hidden');// hides modal window
   document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onEscapeClick);
 };
 
+function onEscapeClick(evt) {
+  if (evt.code === 'Escape') {
+    hideBigPicture();
+  }
+}
 
-export { showBigPicture, hideBigPicture };
+export { showBigPicture, hideBigPicture, onEscapeClick };

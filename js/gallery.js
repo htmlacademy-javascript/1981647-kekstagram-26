@@ -11,12 +11,6 @@ const displayPicture = () => {
     hideBigPicture();
   });
 
-  document.addEventListener('keydown', (evt) => {
-    if (evt.code === 'Escape') {
-      hideBigPicture();
-    }
-  });
-
   generatedPhotoList.forEach((element) => {
     const pictureClone = pictureTemplate.cloneNode(true);
     const imageElement = pictureClone.querySelector('.picture__img');
