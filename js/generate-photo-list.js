@@ -33,18 +33,10 @@ let commentIdCounter = 1;
 
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
 
-const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
-
 const generateComment = () => ({
   id: commentIdCounter++,
   avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
-  message: shuffleArray(COMMENT_MESSAGES).slice(0, getRandomInt(1, COMMENT_MESSAGES.length)),
+  message: getRandomArrayElement(COMMENT_MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 

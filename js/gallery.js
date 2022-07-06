@@ -1,23 +1,34 @@
 import { generatedPhotoList } from './generate-photo-list.js';
+import { showBigPicture, hideBigPicture } from './gallery-preview.js';
 
 const displayPicture = () => {
-  const picturesSection = document.querySelector('.pictures');
-  const pictureTemplate = document.getElementById('picture').content;
+  const picturesSectionNode = document.querySelector('.pictures');
+  const pictureTemplate = document.getElementById('picture').content.querySelector('.picture');
   const picturesListFragment = document.createDocumentFragment();
+  const closeBigPictureButtonElement = document.getElementById('picture-cancel');
+
+  closeBigPictureButtonElement.addEventListener('click', () => {
+    hideBigPicture();
+  });
 
   generatedPhotoList.forEach((element) => {
     const pictureClone = pictureTemplate.cloneNode(true);
-    const image = pictureClone.querySelector('.picture__img');
-    const likes = pictureClone.querySelector('.picture__likes');
-    const comments = pictureClone.querySelector('.picture__comments');
+    const imageElement = pictureClone.querySelector('.picture__img');
+    const likesElement = pictureClone.querySelector('.picture__likes');
+    const commentsElement = pictureClone.querySelector('.picture__comments');
 
-    comments.textContent = element.comments.length;
-    likes.textContent = element.likes;
-    image.src = element.url;
+    commentsElement.textContent = element.comments.length;
+    likesElement.textContent = element.likes;
+    imageElement.src = element.url;
+
+    pictureClone.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      showBigPicture(element);
+    });
 
     picturesListFragment.appendChild(pictureClone);
   });
-  picturesSection.appendChild(picturesListFragment);
+  picturesSectionNode.appendChild(picturesListFragment);
 };
 
 export { displayPicture };
