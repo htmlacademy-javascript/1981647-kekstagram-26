@@ -23,7 +23,7 @@ const numDecline = (num, nominative, genitiveSingular, genitivePlural) => {
 };
 
 
-numDecline(12, 'гость', 'гостя', 'гостей'); // гостей
+export { numDecline };
 
 //число сокращаем до десятка
 //проверяем по диапозонам 1, 2-4, 5 - 20, и больше 20
