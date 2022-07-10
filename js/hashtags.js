@@ -49,7 +49,6 @@ const hashtagsChecker = (value) => {
     },
   ];
 
-
   return checkFormValidation.every((rule) => {
     const isInvalid = rule.check; //проверяем на правила
     if (isInvalid) {

@@ -51,8 +51,6 @@ const pristine = new Pristine(uploadForm, {
   errorTextClass: 'img-upload__error'
 });
 
-
-
 const onHashtagInput = () => {
   if (pristine.validate()) {
     submitButtonElement.disabled = false;
@@ -61,13 +59,11 @@ const onHashtagInput = () => {
   }
 };
 
-
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
     uploadForm.submit();
-
   } else {
     submitButtonElement.disabled = true;
   }
@@ -77,7 +73,6 @@ const formValidation = () => {
   pristine.addValidator(hashtagInputElement, hashtagsChecker, error, 2, false);
   hashtagInputElement.addEventListener('input', onHashtagInput);
   uploadForm.addEventListener('submit', onFormSubmit);
-
-}
+};
 
 export { uploadImageForm, formValidation };
