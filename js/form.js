@@ -1,3 +1,4 @@
+import { hashtagsChecker, error } from './hashtags.js';
 
 const uploadForm = document.querySelector('#upload-select-image');
 const uploadFileInputElement = uploadForm.querySelector('#upload-file');
@@ -5,6 +6,7 @@ const editFormElement = uploadForm.querySelector('.img-upload__overlay');
 const closeFormButtonElement = uploadForm.querySelector('#upload-cancel');
 const hashtagInputElement = uploadForm.querySelector('.text__hashtags');
 const descriptionInputElement = uploadForm.querySelector('.text__description');
+const submitButtonElement = uploadForm.querySelector('.img-upload__submit');
 
 const closeUploadImageForm = () => {
   editFormElement.classList.add('hidden');
@@ -12,7 +14,6 @@ const closeUploadImageForm = () => {
   clearValue(uploadFileInputElement);
   clearValue(hashtagInputElement);
   clearValue(descriptionInputElement);
-
 
   document.removeEventListener('keydown', onEscapeClick);
 };
@@ -31,7 +32,9 @@ const uploadImageForm = () => {
 
 function onEscapeClick(evt) {
   if (evt.code === 'Escape') {
-    closeUploadImageForm();
+    if (document.activeElement !== hashtagInputElement && document.activeElement !== descriptionInputElement){
+      closeUploadImageForm();
+    }
   }
 }
 
@@ -40,21 +43,41 @@ function clearValue(node) {
 }
 
 const pristine = new Pristine(uploadForm, {
-  classTo: 'form__item',
-  errorClass: 'form__item--invalid',
-  successClass: 'form__item--valid',
-  errorTextParent: 'form__item',
-  errorTextTag: 'span',
-  errorTextClass: 'form__error'
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__item--invalid',
+  successClass: 'img__item--valid',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'div',
+  errorTextClass: 'img-upload__error'
 });
 
 
-pristine.addValidator(uploadForm.querySelector('#nickname'));
+
+const onHashtagInput = () => {
+  if (pristine.validate()) {
+    submitButtonElement.disabled = false;
+  } else {
+    submitButtonElement.disabled = true;
+  }
+};
 
 
-uploadForm.addEventListener('submit', (evt) => {
+const onFormSubmit = (evt) => {
   evt.preventDefault();
-  pristine.validate();
-});
+  const isValid = pristine.validate();
+  if (isValid) {
+    uploadForm.submit();
 
-export { uploadImageForm };
+  } else {
+    submitButtonElement.disabled = true;
+  }
+};
+
+const formValidation = () => {
+  pristine.addValidator(hashtagInputElement, hashtagsChecker, error, 2, false);
+  hashtagInputElement.addEventListener('input', onHashtagInput);
+  uploadForm.addEventListener('submit', onFormSubmit);
+
+}
+
+export { uploadImageForm, formValidation };
