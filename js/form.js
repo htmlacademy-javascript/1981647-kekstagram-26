@@ -60,11 +60,8 @@ const onHashtagInput = () => {
 };
 
 const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
-  if (isValid) {
-    uploadForm.submit();
-  } else {
+  if (!pristine.validate()) {
+    evt.preventDefault();
     submitButtonElement.disabled = true;
   }
 };
