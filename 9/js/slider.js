@@ -90,11 +90,7 @@ const onEffectsListChange = (evt) => {
 
   sliderEffectElement.classList.add(sliderSetting.class);
 
-  if (evt.target.value === SpecialEffects.NONE) {
-    slider.style.display = 'none';
-  } else {
-    slider.style.display = 'block';
-  }
+  slider.style.display = (evt.target.value === SpecialEffects.NONE) ? 'none' : 'block';
 
   sliderContainerElement.noUiSlider.updateOptions({
     range: {

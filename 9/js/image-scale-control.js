@@ -4,29 +4,26 @@ const MAX_SCALE = 100;
 
 const scaleDownButtonElement = document.querySelector('.scale__control--smaller');
 const scaleUpButtonElement = document.querySelector('.scale__control--bigger');
-const imageScaleValue = document.querySelector('.scale__control--value');
+const imageScaleInputElement = document.querySelector('.scale__control--value');
 const imagePreviewElement = document.querySelector('.img-upload__preview');
+
+const onScaleButtonClick = (limit, isIncrease) => {
+  const scaleNumber = parseInt(imageScaleInputElement.value, 10);
+
+  if (scaleNumber !== limit) {
+    imageScaleInputElement.value = isIncrease ? `${scaleNumber + (STEP * 100)}%` : `${scaleNumber - (STEP * 100)}%`;
+    imagePreviewElement.style.transform = isIncrease ? `scale(${scaleNumber / 100 + STEP})` : `scale(${scaleNumber / 100 - STEP})`;
+  }
+};
 
 const imageScaleControl =  () => {
 
   scaleDownButtonElement.addEventListener('click', () => {
-    // eslint-disable-next-line radix
-    const scaleNumber = parseInt(imageScaleValue.value.slice(0, -1));
-
-    if (scaleNumber !== MIN_SCALE) {
-      imageScaleValue.value = `${scaleNumber - (STEP * 100)}%`;
-      imagePreviewElement.style.transform = `scale(${scaleNumber / 100 - STEP})`;
-    }
+    onScaleButtonClick(MIN_SCALE, false);
   });
 
   scaleUpButtonElement.addEventListener('click', () => {
-    // eslint-disable-next-line radix
-    const scaleNumber = parseInt(imageScaleValue.value.slice(0, -1));
-
-    if (scaleNumber !== MAX_SCALE) {
-      imageScaleValue.value = `${scaleNumber + (STEP * 100)}%`;
-      imagePreviewElement.style.transform = `scale(${scaleNumber / 100 + STEP})`;
-    }
+    onScaleButtonClick(MAX_SCALE, true);
   });
 };
 
